@@ -536,7 +536,6 @@ class TestTable(unittest.TestCase):
             'end_key': end_key,
             'filter_': filter_obj,
             'limit': limit,
-            'end_inclusive': False,
             'start_key_closed': True,
         }
         self.assertEqual(mock_created, [(table.name, created_kwargs)])
@@ -729,9 +728,9 @@ class TestTable(unittest.TestCase):
 class Test__create_row_request(unittest.TestCase):
 
     def _call_fut(self, table_name, row_key=None, start_key=None, end_key=None,
-                  start_key_closed=None, filter_=None, limit=None,
+                  start_key_closed=True, filter_=None, limit=None,
                   end_inclusive=False):
-        from google.cloud.bigtable.table import _create_row_request
+        from google.cloud.bigtable.retry import _create_row_request
 
         return _create_row_request(
             table_name, row_key=row_key, start_key=start_key, end_key=end_key,

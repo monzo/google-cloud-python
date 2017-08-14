@@ -307,9 +307,6 @@ class Table(object):
         :returns: A :class:`.PartialRowsData` convenience wrapper for consuming
                   the streamed results.
         """
-        request_pb = _create_row_request(
-            self.name, start_key=start_key, end_key=end_key, filter_=filter_,
-            limit=limit, end_inclusive=end_inclusive)
         client = self._instance._client
         if backoff_settings is None:
             backoff_settings = BACKOFF_SETTINGS

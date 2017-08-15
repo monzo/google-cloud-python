@@ -20,7 +20,7 @@ class ReadRowsIterator(object):
     """
 
     def __init__(self, client, name, start_key, end_key, filter_, limit,
-                 retry_options, **kwargs):
+                 end_inclusive, retry_options, **kwargs):
         self.client = client
         self.retry_options = retry_options
         self.name = name
@@ -29,6 +29,7 @@ class ReadRowsIterator(object):
         self.end_key = end_key
         self.filter_ = filter_
         self.limit = limit
+        self.end_inclusive = end_inclusive
         self.delay_mult = retry_options.backoff_settings.retry_delay_multiplier
         self.max_delay_millis = \
             retry_options.backoff_settings.max_retry_delay_millis
@@ -56,7 +57,8 @@ class ReadRowsIterator(object):
         req_pb = _create_row_request(self.name, start_key=self.start_key,
                                      start_key_closed=self.start_key_closed,
                                      end_key=self.end_key,
-                                     filter_=self.filter_, limit=self.limit)
+                                     filter_=self.filter_, limit=self.limit,
+                                     end_inclusive=self.end_inclusive)
         self.stream = self.client._data_stub.ReadRows(req_pb)
 
     def next(self, *args, **kwargs):

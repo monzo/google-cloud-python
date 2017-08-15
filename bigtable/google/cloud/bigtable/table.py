@@ -317,7 +317,7 @@ class Table(object):
 
         retrying_iterator = ReadRowsIterator(client, self.name, start_key,
                                              end_key, filter_, limit,
-                                             RETRY_OPTIONS)
+                                             end_inclusive, RETRY_OPTIONS)
         return PartialRowsData(retrying_iterator)
 
     def mutate_rows(self, rows):

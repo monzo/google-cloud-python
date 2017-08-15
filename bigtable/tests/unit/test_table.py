@@ -533,6 +533,7 @@ class TestTable(unittest.TestCase):
         )])
         created_kwargs = {
             'start_key': start_key,
+            'end_inclusive': False,
             'end_key': end_key,
             'filter_': filter_obj,
             'limit': limit,

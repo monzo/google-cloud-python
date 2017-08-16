@@ -322,7 +322,7 @@ class TestTableAdminAPI(unittest.TestCase):
             stderr=subprocess.PIPE,
         )
 
-        (endpoint, port) = server.stdout.readline().encode("utf-8").rstrip("\n").split(":")
+        (endpoint, port) = server.stdout.readline().decode("utf-8").rstrip("\n").split(":")
         os.environ["BIGTABLE_EMULATOR_HOST"] = endpoint + ":" + port
         client = Client(project="client", admin=True)
         instance = Instance("instance", client)
@@ -340,7 +340,7 @@ class TestTableAdminAPI(unittest.TestCase):
         server.kill()
         server_stdout_lines = []
         while True:
-            line = server.stdout.readline().encode("utf-8")
+            line = server.stdout.readline().decode("utf-8")
             if line != '':
                 server_stdout_lines.append(line)
             else:

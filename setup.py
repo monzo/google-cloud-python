@@ -71,7 +71,7 @@ REQUIREMENTS = [
 ]
 
 setup(
-    name='google-cloud',
+    name='google-cloud-monzo',
     version='0.27.0',
     description='API Client library for Google Cloud. Patched version.',
     long_description=README,
